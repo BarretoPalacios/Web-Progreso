@@ -18,40 +18,35 @@ export default function Dashboard() {
   const navigate = useNavigate()
   const location = useLocation()
 
-  const API_URL = "https://script.google.com/macros/s/AKfycbyaE_0DuFij3BQux5ac1JqKFDnAk9QwLSB8ayCDpCEcBPuLzbTyD1SlEMb_uBv0WR8VXw/exec"
 
   const handleSearch = async () => {
     if (!searchTerm.trim()) return
-
+  
     setIsLoading(true)
     setError(null)
-    
+  
     try {
-      const response = await axios.post(API_URL, { texto: searchTerm }, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        // Configuración especial para Google Apps Script
-        withCredentials: false
-      })
-
+      const response = await axios.get(`http://127.0.0.1:8787/csv?local=${searchTerm}`)
+  
       const result = response.data
-      
-      if (result.success && result.data) {
-        // Convertimos el objeto de datos en un array para mantener la compatibilidad
-        const resultAsArray = [result.data]
-        setSearchResults(resultAsArray)
+
+      console.log(result)
+  
+      if (Array.isArray(result)) {
+        setSearchResults(result)
+      } else if (result) {
+        // Si la API devuelve un solo objeto en vez de un array
+        setSearchResults([result])
       } else {
         setSearchResults([])
       }
-      
+  
       setHasSearched(true)
-
-      // Actualizar la URL con el término de búsqueda
+  
       const params = new URLSearchParams(location.search)
       params.set("search", searchTerm)
       navigate(`?${params.toString()}`, { replace: true })
-
+  
     } catch (err) {
       setError(err.message)
       console.error("Error al buscar:", err)
@@ -60,6 +55,7 @@ export default function Dashboard() {
       setIsLoading(false)
     }
   }
+  
 
   const handleCardClick = (local) => {
     setSelectedLocal(local)
@@ -138,7 +134,7 @@ export default function Dashboard() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {searchResults.map((item) => (
                 <LocalCard 
-                  key={item.local || item.ID} // Usamos ID como fallback
+                  key={item["LOCAL"] || item["ID"]} // Usamos ID como fallback
                   data={item} 
                   onClick={() => handleCardClick(item)} 
                 />

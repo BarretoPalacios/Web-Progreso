@@ -4,7 +4,7 @@ import { Building2, DollarSign, FileText } from "lucide-react"
 
 export default function LocalCard({ data, onClick }) {
   // Calcular el total pendiente (simplificado para el ejemplo)
-  const pendingAmount = Number.parseFloat(data["Saldo por cancelar"].replace(/[^\d.-]/g, "")) || 0
+  const pendingAmount = Number.parseFloat(data["SALDO_CANCELAR"].replace(/[^\d.-]/g, "")) || 0
 
   return (
     <div
@@ -13,24 +13,24 @@ export default function LocalCard({ data, onClick }) {
     >
       <div className="p-5">
         <div className="flex justify-between items-start mb-4">
-          <h3 className="text-xl font-bold text-white">{data.local}</h3>
+          <h3 className="text-xl font-bold text-white">{data["LOCAL"]}</h3>
           <span className="px-2 py-1 bg-purple-900 text-purple-200 text-xs font-medium rounded">{data.proyecto}</span>
         </div>
 
         <div className="space-y-3">
           <div className="flex items-center text-gray-300">
             <Building2 className="h-4 w-4 mr-2 text-gray-400" />
-            <span className="text-sm">Proyecto: {data["PROYECTO 2"] || "N/A"}</span>
+            <span className="text-sm">Proyecto: {data["PROYECTO_2"] || "N/A"}</span>
           </div>
 
           <div className="flex items-center text-gray-300">
             <DollarSign className="h-4 w-4 mr-2 text-gray-400" />
-            <span className="text-sm">Saldo pendiente: {data["Saldo por cancelar"]}</span>
+            <span className="text-sm">Saldo pendiente: {data["SALDO_CANCELAR"]}</span>
           </div>
 
           <div className="flex items-center text-gray-300">
             <FileText className="h-4 w-4 mr-2 text-gray-400" />
-            <span className="text-sm">Cuota inicial: {data["C.INICIAL"]}</span>
+            <span className="text-sm">Cuota inicial: {data["CUOTA_INICIAL"]}</span>
           </div>
         </div>
       </div>

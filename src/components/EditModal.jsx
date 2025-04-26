@@ -43,7 +43,7 @@ export default function EditModal({ isOpen, onClose, data, onSave }) {
       <div className="bg-gray-900 rounded-lg w-full max-w-5xl max-h-[90vh] overflow-hidden flex flex-col">
         {/* Header */}
         <div className="p-4 border-b border-gray-800 flex justify-between items-center sticky top-0 bg-gray-900">
-          <h2 className="text-xl font-bold text-white">Editar Local: {data.local}</h2>
+          <h2 className="text-xl font-bold text-white">Editar Local: {formData["LOCAL"]}</h2>
           <button onClick={onClose} className="text-gray-400 hover:text-white">
             <X className="h-6 w-6" />
           </button>
@@ -71,11 +71,55 @@ export default function EditModal({ isOpen, onClose, data, onSave }) {
           {activeTab === "general" && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-300">DNI</label>
+                <input
+                  type="text"
+                  name="DNI"
+                  value={formData["DNI"] || ""}
+                  onChange={handleChange}
+                  className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-300">Número</label>
+                <input
+                  type="text"
+                  name="NUMERO"
+                  value={formData["NUMERO"] || ""}
+                  onChange={handleChange}
+                  className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-300">Propietario</label>
+                <input
+                  type="text"
+                  name="PROPIETARIO"
+                  value={formData["PROPIETARIO"] || ""}
+                  onChange={handleChange}
+                  className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-300">Datos Personales</label>
+                <input
+                  type="text"
+                  name="DATOS_PERSONALES"
+                  value={formData["DATOS_PERSONALES"] || ""}
+                  onChange={handleChange}
+                  className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white"
+                />
+              </div>
+
+              <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-300">Local</label>
                 <input
                   type="text"
-                  name="local"
-                  value={formData.local || ""}
+                  name="LOCAL"
+                  value={formData["LOCAL"] || ""}
                   onChange={handleChange}
                   className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white"
                 />
@@ -85,19 +129,19 @@ export default function EditModal({ isOpen, onClose, data, onSave }) {
                 <label className="block text-sm font-medium text-gray-300">Cuota Inicial</label>
                 <input
                   type="text"
-                  name="C.INICIAL"
-                  value={formData["C.INICIAL"] || ""}
+                  name="CUOTA_INICIAL"
+                  value={formData["CUOTA_INICIAL"] || ""}
                   onChange={handleChange}
                   className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white"
                 />
               </div>
 
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-300">Proyecto</label>
+                <label className="block text-sm font-medium text-gray-300">Proyecto Eléctrico</label>
                 <input
                   type="text"
-                  name="proyecto"
-                  value={formData.proyecto || ""}
+                  name="PROYECTO_ELECTRICO"
+                  value={formData["PROYECTO_ELECTRICO"] || ""}
                   onChange={handleChange}
                   className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white"
                 />
@@ -107,8 +151,8 @@ export default function EditModal({ isOpen, onClose, data, onSave }) {
                 <label className="block text-sm font-medium text-gray-300">Proyecto 2</label>
                 <input
                   type="text"
-                  name="PROYECTO 2"
-                  value={formData["PROYECTO 2"] || ""}
+                  name="PROYECTO_2"
+                  value={formData["PROYECTO_2"] || ""}
                   onChange={handleChange}
                   className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white"
                 />
@@ -118,8 +162,8 @@ export default function EditModal({ isOpen, onClose, data, onSave }) {
                 <label className="block text-sm font-medium text-gray-300">Saldo por cancelar</label>
                 <input
                   type="text"
-                  name="Saldo por cancelar"
-                  value={formData["Saldo por cancelar"] || ""}
+                  name="SALDO_CANCELAR"
+                  value={formData["SALDO_CANCELAR"] || ""}
                   onChange={handleChange}
                   className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white"
                 />
@@ -129,8 +173,8 @@ export default function EditModal({ isOpen, onClose, data, onSave }) {
                 <label className="block text-sm font-medium text-gray-300">Pollada</label>
                 <input
                   type="text"
-                  name="pollada"
-                  value={formData.pollada || ""}
+                  name="POLLADA"
+                  value={formData["POLLADA"] || ""}
                   onChange={handleChange}
                   className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white"
                 />
@@ -141,7 +185,7 @@ export default function EditModal({ isOpen, onClose, data, onSave }) {
                 <input
                   type="text"
                   name="ITSE"
-                  value={formData.ITSE || ""}
+                  value={formData["ITSE"] || ""}
                   onChange={handleChange}
                   className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white"
                 />
@@ -151,8 +195,8 @@ export default function EditModal({ isOpen, onClose, data, onSave }) {
                 <label className="block text-sm font-medium text-gray-300">Conceptos varios</label>
                 <input
                   type="text"
-                  name="conceptos varios"
-                  value={formData["conceptos varios"] || ""}
+                  name="CONCEP_VARIOS"
+                  value={formData["CONCEP_VARIOS"] || ""}
                   onChange={handleChange}
                   className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white"
                 />
@@ -163,7 +207,7 @@ export default function EditModal({ isOpen, onClose, data, onSave }) {
                 <input
                   type="text"
                   name="ABR"
-                  value={formData.ABR || ""}
+                  value={formData["ABR"] || ""}
                   onChange={handleChange}
                   className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white"
                 />
@@ -174,7 +218,7 @@ export default function EditModal({ isOpen, onClose, data, onSave }) {
                 <input
                   type="text"
                   name="MAY"
-                  value={formData.MAY || ""}
+                  value={formData["MAY"] || ""}
                   onChange={handleChange}
                   className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white"
                 />
@@ -185,20 +229,20 @@ export default function EditModal({ isOpen, onClose, data, onSave }) {
           {activeTab === "mantenimiento" && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
-                "MANT JUN 2024",
-                "MANT. JUL 2024",
-                "MANT AGO 2024",
-                "MANT SET 2024",
-                "MANT OCT 2024",
-                "MANT NOV 2024",
-                "MANT DIC 2024",
-                "MANT ENE 2025",
-                "MANT FEB 2025",
-                "MANT MAR 2025",
-                "MANT ABR 2025",
+                "MANT_JUN_2024",
+                "MANT_JUL_2024",
+                "MANT_AGO_2024",
+                "MANT_SET_2024",
+                "MANT_OCT_2024",
+                "MANT_NOV_2024",
+                "MANT_DIC_2024",
+                "MANT_ENE_2025",
+                "MANT_FEB_2025",
+                "MANT_MAR_2025",
+                "MANT_ABR_2025",
               ].map((field) => (
                 <div key={field} className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-300">{field}</label>
+                  <label className="block text-sm font-medium text-gray-300">{field.replace(/_/g, ' ')}</label>
                   <input
                     type="text"
                     name={field}
@@ -214,24 +258,24 @@ export default function EditModal({ isOpen, onClose, data, onSave }) {
           {activeTab === "cuotas" && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
-                "CUOTA PLUZ 1 Oct 24",
-                "CUOTA PLUZ 2 Nov 24",
-                "CUOTA PLUZ 3 Dic 24",
-                "CUOTA PLUZ 4 Ene 25",
-                "CUOTA PLUZ 5 Feb 25",
-                "CUOTA PLUZ 6 Mar 25",
-                "CUOTA PLUZ 7 Abr 25",
-                "CUOTA PLUZ 7 May 25",
-                "CUOTA PLUZ 7 Jun25",
-                "CUOTA PLUZ 7 Jul25",
-                "CUOTA PLUZ 7 Ago25",
-                "CUOTA PLUZ 11 SET 25",
-                "CUOTA PLUZ 12 OCT 25",
-                "CUOTA PLUZ 12 NOV 25",
-                "CUOTA PLUZ 12 DIC 25",
+                "PLUZ_OCT_2024",
+                "PLUZ_NOV_2024",
+                "PLUZ_DIC_2024",
+                "PLUZ_ENE_2025",
+                "PLUZ_FEB_2025",
+                "PLUZ_MAR_2025",
+                "PLUZ_ABR_2025",
+                "PLUZ_MAY_2025",
+                "PLUZ_JUN_2025",
+                "PLUZ_JUL_2025",
+                "PLUZ_AGO_2025",
+                "PLUZ_SEP_2025",
+                "PLUZ_OCT_2025",
+                "PLUZ_NOV_2025",
+                "PLUZ_DIC_2025",
               ].map((field) => (
                 <div key={field} className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-300">{field}</label>
+                  <label className="block text-sm font-medium text-gray-300">CUOTA PLUZ {field.replace(/PLUZ_/g, '').replace(/_/g, ' ')}</label>
                   <input
                     type="text"
                     name={field}
@@ -247,15 +291,15 @@ export default function EditModal({ isOpen, onClose, data, onSave }) {
           {activeTab === "sedapal" && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
-                "CUOTA 1 SEDAPAL NOV 2024",
-                "CUOTA 2 SEDAPAL DIC 2024",
-                "CUOTA 3 SEDAPAL ENE 2025",
-                "CUOTA 4 SEDAPAL FEB 2025",
-                "CUOTA 5 SEDAPAL MAR 2025",
-                "CUOTA 5 SEDAPAL ABR 2025",
+                "CUOTA 1\nSEDAPAL\n NOV 2024",
+                "CUOTA 2 \nSEDAPAL\nDIC 2024",
+                "CUOTA 3\nSEDAPAL\nENE 2025",
+                "CUOTA 4\nSEDAPAL\nFEB 2025",
+                "CUOTA 5\nSEDAPAL\nMAR 2025",
+                "CUOTA 5\nSEDAPAL\nABR 2025",
               ].map((field) => (
                 <div key={field} className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-300">{field}</label>
+                  <label className="block text-sm font-medium text-gray-300">{field.replace(/\n/g, ' ').trim()}</label>
                   <input
                     type="text"
                     name={field}
@@ -271,16 +315,16 @@ export default function EditModal({ isOpen, onClose, data, onSave }) {
           {activeTab === "consumo" && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
-                "CONSUMO AGUA NOV 2024",
-                "CONSUMO AGUA DIC 2024",
-                "CONSUMO AGUA ENE 2025",
-                "CONSUMO AGUA FEB 2025",
-                "CONSUMO AGUA MARZ 2025",
-                "CONSUMO AGUA ABR 2025",
+                "CONSUMO\nAGUA \nNOV 2024",
+                "CONSUMO\nAGUA \nDIC 2024",
+                "CONSUMO\nAGUA \nENE 2025",
+                "CONSUMO\nAGUA \nFEB 2025",
+                "CONSUMO\nAGUA \nMARZ 2025",
+                "CONSUMO\nAGUA \nABR 2025",
                 "Medidor",
               ].map((field) => (
                 <div key={field} className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-300">{field}</label>
+                  <label className="block text-sm font-medium text-gray-300">{field.replace(/\n/g, ' ').trim()}</label>
                   <input
                     type="text"
                     name={field}
@@ -302,10 +346,10 @@ export default function EditModal({ isOpen, onClose, data, onSave }) {
                 "AREAS COMUNES FEBRERO",
                 "LUZ FEBRERO",
                 "AREAS COMUNES MARZO",
-                "LUZ MARZO",
+                "LUZ \nMARZO",
               ].map((field) => (
                 <div key={field} className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-300">{field}</label>
+                  <label className="block text-sm font-medium text-gray-300">{field.replace(/\n/g, ' ').trim()}</label>
                   <input
                     type="text"
                     name={field}

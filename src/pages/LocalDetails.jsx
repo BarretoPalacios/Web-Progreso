@@ -2,8 +2,37 @@
 
 import { useParams, Link } from "react-router-dom"
 import { useState, useEffect } from "react"
-import { mockData } from "../data/mockData"
 import { ArrowLeft, Edit, Printer, Download } from "lucide-react"
+
+const mockData = [
+  {
+    "DNI": "32132139",
+    "NUMERO": "83",
+    "PROPIETARIO": "B-023",
+    "DATOS_PERSONALES": "GONZALES VEGA,ERICA MILAGROS",
+    "LOCAL": "B-023",
+    "GLOSARIO": "MANT.",
+    "CUOTA_INICIAL": "300.00",
+    "PROYECTO_ELECTRICO": "700.00",
+    "PROYECTO_2": "",
+    "SALDO_CANCELAR": "0.00",
+    "POLLADA": "40.00",
+    "ITSE": "44.00",
+    "CONCEP_VARIOS": "",
+    "ABR": "",
+    "MAY": "",
+    "MANT_AGO_2024": "40.00",
+    "MANT_SET_2024": "40.00",
+    "MANT_OCT_2024": "40.00",
+    "MANT_NOV_2024": "40.00",
+    "MANT_DIC_2024": "40.00",
+    "MANT_ENE_2025": "40.00",
+    "MANT_FEB_2025": "40.00",
+    "TOTAL": "674.00",
+    "Medidor": "",
+    "TELEFONO": "",
+  },
+]
 
 export default function LocalDetails() {
   const { localId } = useParams()
@@ -11,12 +40,8 @@ export default function LocalDetails() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Simular carga de datos
     setLoading(true)
-
-    // Buscar el local en los datos de ejemplo
-    const data = mockData.find((item) => item.local === localId)
-
+    const data = mockData.find((item) => item["LOCAL"] === localId)
     setTimeout(() => {
       setLocalData(data || null)
       setLoading(false)
@@ -51,7 +76,7 @@ export default function LocalDetails() {
             <ArrowLeft className="h-4 w-4 mr-1" />
             <span>Volver al Dashboard</span>
           </Link>
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-100">Local: {localData.local}</h1>
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-100">Local: {localData["LOCAL"]}</h1>
         </div>
 
         <div className="flex gap-2">
@@ -74,111 +99,57 @@ export default function LocalDetails() {
         <div className="bg-gray-900 border border-gray-800 rounded-lg p-6">
           <h2 className="text-lg font-semibold mb-4">Información General</h2>
           <div className="space-y-3">
-            <div className="flex justify-between">
-              <span className="text-gray-400">Proyecto:</span>
-              <span className="font-medium">{localData.proyecto}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-400">Proyecto 2:</span>
-              <span className="font-medium">{localData["PROYECTO 2"] || "N/A"}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-400">Cuota Inicial:</span>
-              <span className="font-medium">{localData["C.INICIAL"]}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-400">Saldo por cancelar:</span>
-              <span className="font-medium text-red-400">{localData["Saldo por cancelar"]}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-400">Total:</span>
-              <span className="font-medium">{localData.TOTAL}</span>
-            </div>
+            <Info label="Propietario" value={localData["PROPIETARIO"]} />
+            <Info label="Datos personales" value={localData["DATOS_PERSONALES"]} />
+            <Info label="Cuota inicial" value={localData["CUOTA_INICIAL"]} />
+            <Info label="Proyecto eléctrico" value={localData["PROYECTO_ELECTRICO"]} />
+            <Info label="Proyecto 2" value={localData["PROYECTO_2"] || "N/A"} />
+            <Info label="Saldo por cancelar" value={localData["SALDO_CANCELAR"]} />
+            <Info label="Total" value={localData["TOTAL"]} />
           </div>
         </div>
 
         <div className="bg-gray-900 border border-gray-800 rounded-lg p-6">
-          <h2 className="text-lg font-semibold mb-4">Conceptos Adicionales</h2>
+          <h2 className="text-lg font-semibold mb-4">Pagos y Conceptos</h2>
           <div className="space-y-3">
-            <div className="flex justify-between">
-              <span className="text-gray-400">Pollada:</span>
-              <span className="font-medium">{localData.pollada}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-400">ITSE:</span>
-              <span className="font-medium">{localData.ITSE}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-400">Conceptos varios:</span>
-              <span className="font-medium">{localData["conceptos varios"]}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-400">ABR:</span>
-              <span className="font-medium">{localData.ABR}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-400">MAY:</span>
-              <span className="font-medium">{localData.MAY}</span>
-            </div>
+            <Info label="Pollada" value={localData["POLLADA"]} />
+            <Info label="ITSE" value={localData["ITSE"]} />
+            <Info label="Conceptos varios" value={localData["CONCEP_VARIOS"] || "N/A"} />
+            <Info label="Pago ABR" value={localData["ABR"] || "N/A"} />
+            <Info label="Pago MAY" value={localData["MAY"] || "N/A"} />
           </div>
         </div>
 
         <div className="bg-gray-900 border border-gray-800 rounded-lg p-6">
-          <h2 className="text-lg font-semibold mb-4">Medidor</h2>
+          <h2 className="text-lg font-semibold mb-4">Medidor y Contacto</h2>
           <div className="space-y-3">
-            <div className="flex justify-between">
-              <span className="text-gray-400">Número de medidor:</span>
-              <span className="font-medium">{localData.Medidor}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-400">Último consumo:</span>
-              <span className="font-medium">{localData["CONSUMO AGUA ABR 2025"]}</span>
-            </div>
+            <Info label="Medidor" value={localData["Medidor"] || "N/A"} />
+            <Info label="Teléfono" value={localData["TELEFONO"] || "N/A"} />
           </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-6">
-        <div className="bg-gray-900 border border-gray-800 rounded-lg p-6">
-          <h2 className="text-lg font-semibold mb-4">Historial de Mantenimiento</h2>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-gray-800">
-                  <th className="text-left py-3 px-4">Periodo</th>
-                  <th className="text-right py-3 px-4">Monto</th>
-                  <th className="text-right py-3 px-4">Estado</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  "MANT JUN 2024",
-                  "MANT. JUL 2024",
-                  "MANT AGO 2024",
-                  "MANT SET 2024",
-                  "MANT OCT 2024",
-                  "MANT NOV 2024",
-                  "MANT DIC 2024",
-                  "MANT ENE 2025",
-                  "MANT FEB 2025",
-                  "MANT MAR 2025",
-                  "MANT ABR 2025",
-                ].map((period) => (
-                  <tr key={period} className="border-b border-gray-800">
-                    <td className="py-3 px-4">{period}</td>
-                    <td className="py-3 px-4 text-right">{localData[period]}</td>
-                    <td className="py-3 px-4 text-right">
-                      <span className="inline-block px-2 py-1 rounded-full text-xs bg-green-900 text-green-300">
-                        Pagado
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+      <div className="bg-gray-900 border border-gray-800 rounded-lg p-6 mb-12">
+        <h2 className="text-lg font-semibold mb-4">Mantenimientos</h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <Info label="AGO 2024" value={localData["MANT_AGO_2024"] || "-"} />
+          <Info label="SET 2024" value={localData["MANT_SET_2024"] || "-"} />
+          <Info label="OCT 2024" value={localData["MANT_OCT_2024"] || "-"} />
+          <Info label="NOV 2024" value={localData["MANT_NOV_2024"] || "-"} />
+          <Info label="DIC 2024" value={localData["MANT_DIC_2024"] || "-"} />
+          <Info label="ENE 2025" value={localData["MANT_ENE_2025"] || "-"} />
+          <Info label="FEB 2025" value={localData["MANT_FEB_2025"] || "-"} />
         </div>
       </div>
+    </div>
+  )
+}
+
+function Info({ label, value }) {
+  return (
+    <div className="flex justify-between">
+      <span className="text-gray-400">{label}:</span>
+      <span className="font-medium text-white">{value}</span>
     </div>
   )
 }
