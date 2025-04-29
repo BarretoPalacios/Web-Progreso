@@ -26,7 +26,7 @@ export default function Dashboard() {
     setError(null)
   
     try {
-      const response = await axios.get(`http://127.0.0.1:8787/csv?local=${searchTerm}`)
+      const response = await axios.get(`http://127.0.0.1:8000/find_one/?local=${searchTerm}`)
   
       const result = response.data
 
