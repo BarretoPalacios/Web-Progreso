@@ -4,7 +4,7 @@ import { Building2, DollarSign, FileText } from "lucide-react"
 
 export default function LocalCard({ data, onClick }) {
   // Calcular el total pendiente (simplificado para el ejemplo)
-  const pendingAmount = Number.parseFloat(data["SALDO_CANCELAR"].replace(/[^\d.-]/g, "")) || 0
+  const pendingAmount = data["SALDO_CANCELAR"]
 
   return (
     <div
@@ -14,7 +14,7 @@ export default function LocalCard({ data, onClick }) {
       <div className="p-5">
         <div className="flex justify-between items-start mb-4">
           <h3 className="text-xl font-bold text-white">{data["LOCAL"]}</h3>
-          <span className="px-2 py-1 bg-purple-900 text-purple-200 text-xs font-medium rounded">{data.proyecto}</span>
+          <span className="px-2 py-1 bg-purple-900 text-purple-200 text-xs font-medium rounded">{data["PROYECTO_ELECTRICO"]}</span>
         </div>
 
         <div className="space-y-3">

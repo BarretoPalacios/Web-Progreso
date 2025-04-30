@@ -1,32 +1,32 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { X, Save } from "lucide-react"
+import { useState, useEffect } from "react";
+import { X, Save } from "lucide-react";
 
 export default function EditModal({ isOpen, onClose, data, onSave }) {
-  const [formData, setFormData] = useState({})
-  const [activeTab, setActiveTab] = useState("general")
+  const [formData, setFormData] = useState({});
+  const [activeTab, setActiveTab] = useState("general");
 
   useEffect(() => {
     if (data) {
-      setFormData({ ...data })
+      setFormData({ ...data });
     }
-  }, [data])
+  }, [data]);
 
-  if (!isOpen) return null
+  if (!isOpen) return null;
 
   const handleChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    onSave(formData)
-  }
+    e.preventDefault();
+    onSave(formData);
+  };
 
   // Agrupar campos por categorías para mejor organización
   const tabs = [
@@ -35,15 +35,17 @@ export default function EditModal({ isOpen, onClose, data, onSave }) {
     { id: "cuotas", label: "Cuotas PLUZ" },
     { id: "sedapal", label: "Sedapal" },
     { id: "consumo", label: "Consumo Agua" },
-    { id: "otros", label: "Otros Gastos" },
-  ]
+    { id: "otros", label: "Luz - Areas Comunes" },
+  ];
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
       <div className="bg-gray-900 rounded-lg w-full max-w-5xl max-h-[90vh] overflow-hidden flex flex-col">
         {/* Header */}
         <div className="p-4 border-b border-gray-800 flex justify-between items-center sticky top-0 bg-gray-900">
-          <h2 className="text-xl font-bold text-white">Editar Local: {formData["LOCAL"]}</h2>
+          <h2 className="text-xl font-bold text-white">
+            Editar Local: {formData["LOCAL"]}
+          </h2>
           <button onClick={onClose} className="text-gray-400 hover:text-white">
             <X className="h-6 w-6" />
           </button>
@@ -70,63 +72,11 @@ export default function EditModal({ isOpen, onClose, data, onSave }) {
         <form onSubmit={handleSubmit} className="overflow-y-auto flex-1 p-4">
           {activeTab === "general" && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-300">DNI</label>
-                <input
-                  type="text"
-                  name="DNI"
-                  value={formData["DNI"] || ""}
-                  onChange={handleChange}
-                  className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white"
-                />
-              </div>
 
-              <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-300">Número</label>
-                <input
-                  type="text"
-                  name="NUMERO"
-                  value={formData["NUMERO"] || ""}
-                  onChange={handleChange}
-                  className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-300">Propietario</label>
-                <input
-                  type="text"
-                  name="PROPIETARIO"
-                  value={formData["PROPIETARIO"] || ""}
-                  onChange={handleChange}
-                  className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-300">Datos Personales</label>
-                <input
-                  type="text"
-                  name="DATOS_PERSONALES"
-                  value={formData["DATOS_PERSONALES"] || ""}
-                  onChange={handleChange}
-                  className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-300">Local</label>
-                <input
-                  type="text"
-                  name="LOCAL"
-                  value={formData["LOCAL"] || ""}
-                  onChange={handleChange}
-                  className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-300">Cuota Inicial</label>
+<div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-300">
+                  Cuota Inicial
+                </label>
                 <input
                   type="text"
                   name="CUOTA_INICIAL"
@@ -137,7 +87,9 @@ export default function EditModal({ isOpen, onClose, data, onSave }) {
               </div>
 
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-300">Proyecto Eléctrico</label>
+                <label className="block text-sm font-medium text-gray-300">
+                  Proyecto Eléctrico
+                </label>
                 <input
                   type="text"
                   name="PROYECTO_ELECTRICO"
@@ -148,7 +100,9 @@ export default function EditModal({ isOpen, onClose, data, onSave }) {
               </div>
 
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-300">Proyecto 2</label>
+                <label className="block text-sm font-medium text-gray-300">
+                  Proyecto 2
+                </label>
                 <input
                   type="text"
                   name="PROYECTO_2"
@@ -159,18 +113,9 @@ export default function EditModal({ isOpen, onClose, data, onSave }) {
               </div>
 
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-300">Saldo por cancelar</label>
-                <input
-                  type="text"
-                  name="SALDO_CANCELAR"
-                  value={formData["SALDO_CANCELAR"] || ""}
-                  onChange={handleChange}
-                  className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-300">Pollada</label>
+                <label className="block text-sm font-medium text-gray-300">
+                  Pollada
+                </label>
                 <input
                   type="text"
                   name="POLLADA"
@@ -181,7 +126,9 @@ export default function EditModal({ isOpen, onClose, data, onSave }) {
               </div>
 
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-300">ITSE</label>
+                <label className="block text-sm font-medium text-gray-300">
+                  ITSE
+                </label>
                 <input
                   type="text"
                   name="ITSE"
@@ -192,18 +139,102 @@ export default function EditModal({ isOpen, onClose, data, onSave }) {
               </div>
 
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-300">Conceptos varios</label>
+                <label className="block text-sm font-medium text-gray-300">
+                  DNI
+                </label>
                 <input
                   type="text"
-                  name="CONCEP_VARIOS"
-                  value={formData["CONCEP_VARIOS"] || ""}
+                  name="NUMERO_DNI"
+                  value={formData["NUMERO_DNI"] || ""}
                   onChange={handleChange}
                   className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white"
                 />
               </div>
 
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-300">ABR</label>
+                <label className="block text-sm font-medium text-gray-300">
+                  Número
+                </label>
+                <input
+                  type="text"
+                  name="NUMERO"
+                  value={formData["NUMERO"] || ""}
+                  onChange={handleChange}
+                  className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-300">
+                  Propietario
+                </label>
+                <input
+                  type="text"
+                  name="LOCAL"
+                  value={formData["LOCAL"] || ""}
+                  onChange={handleChange}
+                  className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-300">
+                  Datos Personales
+                </label>
+                <input
+                  type="text"
+                  name="DATOS_PROPIETARIOS_SEGUN_SUNARP"
+                  value={formData["DATOS_PROPIETARIOS_SEGUN_SUNARP"] || ""}
+                  onChange={handleChange}
+                  className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-300">
+                  Local
+                </label>
+                <input
+                  type="text"
+                  name="LOCAL"
+                  value={formData["LOCAL"] || ""}
+                  onChange={handleChange}
+                  className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white"
+                />
+              </div>
+
+
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-300">
+                  Saldo por cancelar
+                </label>
+                <input
+                  type="text"
+                  name="SALDO_CANCELAR"
+                  value={formData["SALDO_CANCELAR"] || ""}
+                  onChange={handleChange}
+                  className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white"
+                />
+              </div>
+
+
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-300">
+                  Conceptos varios
+                </label>
+                <input
+                  type="text"
+                  name="CONCEPTOS_VARIOS"
+                  value={formData["CONCEPTOS_VARIOS"] || ""}
+                  onChange={handleChange}
+                  className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-300">
+                  ABR
+                </label>
                 <input
                   type="text"
                   name="ABR"
@@ -214,7 +245,9 @@ export default function EditModal({ isOpen, onClose, data, onSave }) {
               </div>
 
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-300">MAY</label>
+                <label className="block text-sm font-medium text-gray-300">
+                  MAY
+                </label>
                 <input
                   type="text"
                   name="MAY"
@@ -242,7 +275,9 @@ export default function EditModal({ isOpen, onClose, data, onSave }) {
                 "MANT_ABR_2025",
               ].map((field) => (
                 <div key={field} className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-300">{field.replace(/_/g, ' ')}</label>
+                  <label className="block text-sm font-medium text-gray-300">
+                    {field.replace(/_/g, " ")}
+                  </label>
                   <input
                     type="text"
                     name={field}
@@ -258,24 +293,26 @@ export default function EditModal({ isOpen, onClose, data, onSave }) {
           {activeTab === "cuotas" && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
-                "PLUZ_OCT_2024",
-                "PLUZ_NOV_2024",
-                "PLUZ_DIC_2024",
-                "PLUZ_ENE_2025",
-                "PLUZ_FEB_2025",
-                "PLUZ_MAR_2025",
-                "PLUZ_ABR_2025",
-                "PLUZ_MAY_2025",
-                "PLUZ_JUN_2025",
-                "PLUZ_JUL_2025",
-                "PLUZ_AGO_2025",
-                "PLUZ_SEP_2025",
-                "PLUZ_OCT_2025",
-                "PLUZ_NOV_2025",
-                "PLUZ_DIC_2025",
+                "CUOTA_PLUZ_1_OCT_24\n Oct 24\n  ",
+                "CUOTA_PLUZ_2_NOV_24",
+                "CUOTA_PLUZ_3_DIC_24",
+                "CUOTA_PLUZ_4_ENE_25",
+                "CUOTA_PLUZ_5_FEB_25",
+                "CUOTA_PLUZ_6_MAR_25",
+                "CUOTA_PLUZ_7_ABR_25",
+                "CUOTA_PLUZ_7_MAY_25",
+                "CUOTA_PLUZ_7_JUN25",
+                "CUOTA_PLUZ_7_JUL25",
+                "CUOTA_PLUZ_7_AGO25",
+                "CUOTA_PLUZ_11_SET_25 ",
+                "CUOTA_PLUZ_12_OCT_25",
+                "CUOTA_PLUZ_12_NOV_25",
+                "CUOTA_PLUZ_12_DIC_25",
               ].map((field) => (
                 <div key={field} className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-300">CUOTA PLUZ {field.replace(/PLUZ_/g, '').replace(/_/g, ' ')}</label>
+                  <label className="block text-sm font-medium text-gray-300">
+                    CUOTA PLUZ {field.replace(/PLUZ_/g, "").replace(/_/g, " ")}
+                  </label>
                   <input
                     type="text"
                     name={field}
@@ -291,15 +328,17 @@ export default function EditModal({ isOpen, onClose, data, onSave }) {
           {activeTab === "sedapal" && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
-                "CUOTA 1\nSEDAPAL\n NOV 2024",
-                "CUOTA 2 \nSEDAPAL\nDIC 2024",
-                "CUOTA 3\nSEDAPAL\nENE 2025",
-                "CUOTA 4\nSEDAPAL\nFEB 2025",
-                "CUOTA 5\nSEDAPAL\nMAR 2025",
-                "CUOTA 5\nSEDAPAL\nABR 2025",
+                "CUOTA_1_SEDAPAL_NOV_2024",
+                "CUOTA_2_SEDAPAL_DIC_2024",
+                "CUOTA_3_SEDAPAL_ENE_2025",
+                "CUOTA_4_SEDAPAL_FEB_2025",
+                "CUOTA_5_SEDAPAL_MAR_2025",
+                "CUOTA_5_SEDAPAL_ABR_2025",
               ].map((field) => (
                 <div key={field} className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-300">{field.replace(/\n/g, ' ').trim()}</label>
+                  <label className="block text-sm font-medium text-gray-300">
+                    {field.replace(/\n/g, " ").trim()}
+                  </label>
                   <input
                     type="text"
                     name={field}
@@ -315,16 +354,18 @@ export default function EditModal({ isOpen, onClose, data, onSave }) {
           {activeTab === "consumo" && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
-                "CONSUMO\nAGUA \nNOV 2024",
-                "CONSUMO\nAGUA \nDIC 2024",
-                "CONSUMO\nAGUA \nENE 2025",
-                "CONSUMO\nAGUA \nFEB 2025",
-                "CONSUMO\nAGUA \nMARZ 2025",
-                "CONSUMO\nAGUA \nABR 2025",
+                "CONSUMO_AGUA_NOV_2024",
+                "CONSUMO_AGUA_DIC_2024",
+                "CONSUMO_AGUA_ENE_2025",
+                "CONSUMO_AGUA_FEB_2025",
+                "CONSUMO_AGUA_MARZ_2025",
+                "CONSUMO_AGUA_ABR_2025",
                 "Medidor",
               ].map((field) => (
                 <div key={field} className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-300">{field.replace(/\n/g, ' ').trim()}</label>
+                  <label className="block text-sm font-medium text-gray-300">
+                    {field.replace(/\n/g, " ").trim()}
+                  </label>
                   <input
                     type="text"
                     name={field}
@@ -349,7 +390,9 @@ export default function EditModal({ isOpen, onClose, data, onSave }) {
                 "LUZ \nMARZO",
               ].map((field) => (
                 <div key={field} className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-300">{field.replace(/\n/g, ' ').trim()}</label>
+                  <label className="block text-sm font-medium text-gray-300">
+                    {field.replace(/\n/g, " ").trim()}
+                  </label>
                   <input
                     type="text"
                     name={field}
@@ -383,5 +426,5 @@ export default function EditModal({ isOpen, onClose, data, onSave }) {
         </div>
       </div>
     </div>
-  )
+  );
 }

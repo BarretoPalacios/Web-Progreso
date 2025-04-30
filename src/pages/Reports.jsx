@@ -1,15 +1,30 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Download, Filter, BarChart3, PieChart } from "lucide-react"
+import { useState,useEffect } from "react"
+import axios from "axios"
+import { Download, Filter, BarChart3, PieChart } from "lucide-react";
 
 export default function Reports() {
-  const [reportType, setReportType] = useState("payments")
+  const [reportType, setReportType] = useState("payments");
+
+  const [totalRecords, setTotalRecords] = useState(0)
+
+  useEffect(() => {
+    axios.get("http://127.0.0.1:8000/reports/")
+      .then((res) => {
+        setTotalRecords(res.data.total)
+      })
+      .catch((err) => {
+        console.error("Error al obtener el total:", err)
+      })
+  }, [])
 
   return (
     <div>
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-100">Reportes</h1>
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-100">
+          Reportes
+        </h1>
 
         <div className="flex gap-2">
           <select
@@ -36,22 +51,38 @@ export default function Reports() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div className="bg-gray-900 border border-gray-800 rounded-lg p-6">
+          <h2 className="text-lg font-semibold mb-2">Total de registros</h2>
+          <p className="text-3xl font-bold text-blue-400">
+            {totalRecords !== null ? totalRecords : "..."}
+          </p>
+          <p className="text-sm text-gray-400 mt-1">
+            Registros en la base de datos
+          </p>
+        </div>
+
+        {/* <div className="bg-gray-900 border border-gray-800 rounded-lg p-6">
           <h2 className="text-lg font-semibold mb-2">Total recaudado</h2>
           <p className="text-3xl font-bold text-purple-400">S/ 45,280.00</p>
-          <p className="text-sm text-gray-400 mt-1">+12% respecto al mes anterior</p>
+          <p className="text-sm text-gray-400 mt-1">
+            +12% respecto al mes anterior
+          </p>
         </div>
 
         <div className="bg-gray-900 border border-gray-800 rounded-lg p-6">
           <h2 className="text-lg font-semibold mb-2">Pagos pendientes</h2>
           <p className="text-3xl font-bold text-red-400">S/ 12,450.00</p>
-          <p className="text-sm text-gray-400 mt-1">8 locales con pagos pendientes</p>
+          <p className="text-sm text-gray-400 mt-1">
+            8 locales con pagos pendientes
+          </p>
         </div>
 
         <div className="bg-gray-900 border border-gray-800 rounded-lg p-6">
           <h2 className="text-lg font-semibold mb-2">Tasa de cumplimiento</h2>
           <p className="text-3xl font-bold text-green-400">78%</p>
-          <p className="text-sm text-gray-400 mt-1">+5% respecto al mes anterior</p>
-        </div>
+          <p className="text-sm text-gray-400 mt-1">
+            +5% respecto al mes anterior
+          </p>
+        </div> */}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -79,7 +110,9 @@ export default function Reports() {
       </div>
 
       <div className="bg-gray-900 border border-gray-800 rounded-lg p-6">
-        <h2 className="text-lg font-semibold mb-4">Últimos pagos registrados</h2>
+        <h2 className="text-lg font-semibold mb-4">
+          Últimos pagos registrados
+        </h2>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
@@ -142,5 +175,5 @@ export default function Reports() {
         </div>
       </div>
     </div>
-  )
+  );
 }

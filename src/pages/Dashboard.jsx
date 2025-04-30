@@ -62,11 +62,28 @@ export default function Dashboard() {
     setIsModalOpen(true)
   }
 
-  const handleSave = (updatedData) => {
-    console.log("Datos actualizados:", updatedData)
-    // Aquí iría la lógica para guardar en el backend
-    setIsModalOpen(false)
-  }
+  const handleSave = async (updatedData) => {
+    try {
+      console.log("Datos actualizados:", updatedData);
+  
+      const response = await axios.put(
+        `http://127.0.0.1:8000/edit/${updatedData._id}`, 
+        updatedData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            // Add other headers (e.g., auth) if needed
+          },
+        }
+      );
+  
+      console.log("Respuesta del servidor:", response.data);
+      setIsModalOpen(false);
+    } catch (error) {
+      console.error("Error en la petición PUT:", error.response?.data || error.message);
+      // Optional: Mostrar error al usuario (ej. con un toast/alert)
+    }
+  };
 
   return (
     <div className="container mx-auto">
@@ -83,7 +100,7 @@ export default function Dashboard() {
               className="bg-gray-900 border border-gray-700 text-gray-100 text-sm rounded-lg block w-full pl-10 p-2.5 focus:ring-purple-500 focus:border-purple-500"
               placeholder="Buscar local (ej: X-034)"
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={(e) => setSearchTerm(e.target.value.toUpperCase())}
               onKeyDown={(e) => e.key === "Enter" && handleSearch()}
             />
           </div>
